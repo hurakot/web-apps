@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class = "col-md-8 mb-3 justify-content-start">
+
+            <div class="d-block">
+                <form class="card" action="/form" method="GET">
+                    <div class="card-header">
+                        <label for="input" class="form-label ms-2 {% if resik == 1 or resik == 2 %} invalid-feedback d-block{% endif %}" aria-describedby="emailHelp">GET-форма</label>
+                    </div>
+                    <div class="card-text">
+                        <label for="phone_number" class="form-label ms-4 {% if resik == 1 or resik == 2 %} invalid-feedback d-block{% endif %}" aria-describedby="emailHelp">Введите номер телефона</label>
+                        <input id="phone_number" class="form-control m-2 {% if resik == 1 or resik == 2 %} is-invalid {% endif %}" name="phone1" type="phone" style="width: calc(100% - 15px);" placeholder="Вот здесь">
+
+                        <textarea id="input" class="form-control m-2 {% if resik == 1 or resik == 2 %} is-invalid {% endif %}" style="width: calc(100% - 15px);" rows="4" placeholder="Введите комментарий: " ></textarea>
+                        <button type="submit" class="btn btn-primary m-2">Проверить</button>
+                    </div>
+                </form>
+            </div>
+            <div>
+                <p>
+                    Параметры URL-адреса: {{ pamURL }}<br><br>
+                    Статус обработки телефона: {{ result }}<br><br>
+                    Номер телефона: {{ phone }}<br><br>
+                </p>
+            </div>
+
+            <div class="d-block">
+                <form class="card" action="/form" method="POST">
+                    <div class="card-header">
+                        <label for="input" class="form-label ms-2 {% if resik == 1 or resik == 2 %} invalid-feedback d-block{% endif %}" aria-describedby="emailHelp">POST-форма</label>
+                    </div>
+                    <div class="card-text">
+                        <label for="phone_number1" class="form-label ms-4 {% if resik == 1 or resik == 2 %} invalid-feedback d-block{% endif %}" aria-describedby="emailHelp">Введите номер телефона</label>
+                        <input id="phone_number1" class="form-control m-2 {% if resik == 1 or resik == 2 %} is-invalid {% endif %}" name="phone1" type="phone" style="width: calc(100% - 15px);" placeholder="Вот здесь">
+
+                        <textarea id="input1" class="form-control m-2 {% if resik == 1 or resik == 2 %} is-invalid {% endif %}" style="width: calc(100% - 15px);" rows="4" placeholder="Введите комментарий: " ></textarea>
+                        <button type="submit" class="btn btn-primary m-2">Проверить</button>
+                    </div>
+                </form>
+            </div>
+            <div>
+                <p>
+                    Заголовки запроса: {{ zagolovki }}<br><br>
+                    Файлы Cookies: {{ Kukies }}<br><br>
+                    Параметры формы: {{ pamform }}<br><br>
+                    Статус обработки телефона: {{ result }}<br><br>
+                    Номер телефона: {{ phone }}<br><br>
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>    
+{% endblock %}
