@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div>Количество посещений: {{ visits }}</div>
+
+    <form action="/sessia" method="post">
+        <button type="submit">Сбросить в 0</button>
+    </form>
+{% endblock %}
