@@ -1,0 +1,68 @@
+
+
+<!--
+главная страница, на не отображается 
+список пользователей в виде таблицы.
+Страница доступна всем пользователям. 
+В списке отображены учётные записи пользователей.
+
+Также на этой странице реализовано удаление учётной записи пользователя через модальное окно
+-->
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class = "col-md-10 mb-3 justify-content-start">
+            <table class="table table-bordered m-2 text-center table-hover">
+                <tr>
+                    <th class="col-1">id</th>
+                    <th class="col-3">ФИО</th>
+                    <th class="col-2">Роль</th>
+                    <th class="col-2">Просмотр</th>
+                    <th class="col-2">Редактирование</th>
+                    <th class="col-2">Удаление</th>
+                </tr>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.surname}} {{user.name}} {{user.patronymic}}</td>
+                    <td>{{ user.role }}</td>
+                    <td><a class="btn btn-primary" href="{{ url_for('record', id = user.id) }}">Просмотр</a></td>
+                    {% if authorisation == "user" %}
+                    <td><a class="btn btn-primary" href="{{ url_for('editing', id = user.id) }}">Редактирование</a></td>
+                    <!--<td><a class="btn btn-primary" href="{{ url_for('delete', id = user.id) }}">Удаление</a></td>-->
+                    <td><button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#myModal{{ user.id }}">Удаление</button></td>
+                    {% else %}
+                    <td></td>
+                    <td></td>
+                    {% endif %}
+                </tr>
+                <div class="modal fade" id = "myModal{{ user.id }}">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title">Удаление записи</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <input value="{{ user.id }}" name="id" type="hidden"></input>
+                                Вы правда хотите удалить запись с ФИО: {{ user.surname }} {{ user.name }} {{user.patronymic}}?
+                            </div>
+                            <div class="modal-footer">
+                                <form method="POST" action="{{ url_for('delete', id = user.id) }}">
+                                    <button class="btn btn-danger">Удалить</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </table>
+            <a class="btn btn-primary m-2" href="{{ url_for('create') }}">Создать новую запись</a>
+        </div>
+    </div>
+</div>    
+{% endblock %}

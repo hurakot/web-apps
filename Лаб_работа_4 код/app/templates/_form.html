@@ -1,0 +1,62 @@
+
+
+<!--
+Макрос с формой, которая стала основой для страниц editing.html и create.html
+-->
+
+
+{% macro user_form(user=None, mode='create', method = "POST", action = "/create") %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class = "col-md-8 mb-3 justify-content-start">
+
+                <div class="d-block">
+                    <form class="card" action="{{ action }}" method= "{{ method }}">
+                        <div class="card-header">
+                            <label for="input" class="form-label ms-2" aria-describedby="emailHelp">Авторизация: </label>
+                        </div>
+                        <div class="card-text">
+                            {% if mode == "create" %}
+                                <label for="username" class="form-label ms-4 mt-2" aria-describedby="emailHelp">Введите логин:</label>
+                                <input id="username" class="form-control ms-2 mb-3 {% if user_correct == 0 %} is-invalid {%endif%}" name="username" value="{{username or '' }}" type="text" style="width: calc(100% - 15px);" placeholder="Логин:" required>
+
+                                <label for="password" class="form-label ms-4" aria-describedby="emailHelp">Введите пароль:</label>
+                                <input id="password" class="form-control ms-2 mb-3 {% if password_correct == 0 %} is-invalid {%endif%}" name="password" value="{{password or '' }}" type="text" style="width: calc(100% - 15px);" placeholder="Пароль:" required>
+                            {% endif %}
+
+                            {% if mode == "edit" %}
+                                <input value="{{ user.id }}" name="id" type="hidden"></input>
+                            {% endif %}
+
+                            <label for="surname" class="form-label ms-4" aria-describedby="emailHelp">Введите фамилию:</label>
+                            <input id="surname" class="form-control ms-2 mb-3" name="surname" value="{{user.surname or '' }}" type="text" style="width: calc(100% - 15px);" placeholder="Фамилия:" required>
+
+                            <label for="name" class="form-label ms-4" aria-describedby="emailHelp">Введите имя:</label>
+                            <input id="name" class="form-control ms-2 mb-3" name="name" value="{{user.name or '' }}" type="text" style="width: calc(100% - 15px);" placeholder="Имя:" required>
+
+                            <label for="patronymic" class="form-label ms-4" aria-describedby="emailHelp">Введите отчество:</label>
+                            <input id="patronymic" class="form-control ms-2 mb-3" name="patronymic" value="{{user.patronymic or '' }}" type="text" style="width: calc(100% - 15px);" placeholder="Отчество:" required>
+
+                            <label for="role" class="form-label my-2 ms-2" aria-describedby="emailHelp">Введите роль:</label>
+                            <select id="role" class="form-control ms-2 mb-3" style="width: 300px" name="role">
+                                <option value="nochosen" {% if user.role == 'nochosen' %} selected {% endif %}>Не выбрана роль</option>
+                                <option value="admin" {% if user.role == 'admin' %} selected {% endif %}>Админ</option>
+                                <option value="manager" {% if user.role == 'manager' %} selected {% endif %}>Менеджер</option>
+                                <option value="employee" {% if user.role == 'employee' %} selected {% endif %}>Сотрудник</option>
+                                <option value="tester" {% if user.role == 'tester' %} selected {% endif %}>Тестировщик</option>
+                            </select>
+                            <div class="d-block"></div>
+                            <button type="submit" class="btn btn-primary m-2">
+                                {% if mode == "create" %} 
+                                    Создать 
+                                {% elif mode == "edit" %}
+                                    Сохранить 
+                                {% endif %}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endmacro %}

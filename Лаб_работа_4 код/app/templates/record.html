@@ -1,0 +1,51 @@
+
+
+<!--
+просмотр записи пользователя, 
+которого мы выбрали в index.html. 
+Доступ к страница имеют все пользователи, 
+в том числе и не авторизованные.
+-->
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class = "col-md-8 mb-3 justify-content-start">
+            <table class="table table-bordered m-2 text-center table-hover">
+                <tr>
+                    <td class="col-2">id</td>
+                    <td class="col-10">{{ id }}</td>
+                </tr>
+                <tr>
+                    <td class="col-2">Логин</td>
+                    <td class="col-10">{{ username }}</td>
+                </tr>
+                <tr>
+                    <td class="col-2">Фамилия</td>
+                    <td class="col-10">{{ surname }}</td>
+                </tr>
+                <tr>
+                    <td class="col-2">Имя</td>
+                    <td class="col-10">{{ name }}</td>
+                </tr>
+                <tr>
+                    <td class="col-2">Отчество</td>
+                    <td class="col-10">{{ patronymic }}</td>
+                </tr>
+                <tr>
+                    <td class="col-2">Роль</td>
+                    <td class="col-10">{{ role }}</td>
+                </tr>
+                <tr>
+                    <td class="col-2">Дата создания</td>
+                    <td class="col-10">{{ date }}</td>
+                </tr>
+            </table>
+            <a class="btn btn-primary m-2" href="{{ url_for('index') }}">Вернуться на главную страницу</a>
+        </div>
+    </div>
+</div>    
+{% endblock %}

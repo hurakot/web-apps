@@ -1,0 +1,40 @@
+<!--
+Страница, где вы авторизуетесь в систему
+-->
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class = "col-md-8 mb-3 justify-content-start">
+
+                <div class="d-block">
+                    <form class="card" action="/authorisation" method="POST">
+                        <div class="card-header">
+                            <label for="input" class="form-label ms-2" aria-describedby="emailHelp">Авторизация: </label>
+                        </div>
+                        <div class="card-text">
+                            <label for="username" class="form-label ms-4" aria-describedby="emailHelp">Введите логин:</label>
+                            <input id="username" class="form-control m-2" name="username" type="text" style="width: calc(100% - 15px);" placeholder="Логин:">
+
+                            <label for="password" class="form-label ms-4" aria-describedby="emailHelp">Введите пароль:</label>
+                            <input id="password" class="form-control m-2" name="password" type="text" style="width: calc(100% - 15px);" placeholder="Пароль:">
+                            <label>
+                                <input class="m-2" type="checkbox" name="checkbox">
+                                Запомнить меня<br>
+                            </label>
+                            <div class="d-block"></div>
+                            <button type="submit" class="btn btn-primary m-2">зарегестрироваться</button>
+                        </div>
+                    </form>
+                    <form class="card" action="/goout" method="POST">
+                        <div class="card-header">
+                            <label for="input1" class="form-label ms-2" aria-describedby="emailHelp">Выйти из системы</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary m-2">Выйти из системы</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
