@@ -1,0 +1,49 @@
+<!-- Страница, на которой реализуется журнал посещений -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class = "col-md-10 mb-3 justify-content-start">
+                <title>Страница журналов</title>
+                <div>Здесь можно посмотреть все записи, когда, кто и куда заходил на этом сайте.</div>
+                <button class="btn btn-primary m-2" href="{{ url_for('create') }}"> Перейти на главную страницу</button>
+                <table class="table table-bordered m-2 text-center table-hover">
+                    <tr>
+                        <th>№</th>
+                        <th>Пользователь</th>
+                        <th>Страница</th>
+                        <th>Дата</th>
+                    </tr>
+                    {% for visit in visit_logs %}
+                        <tr>
+                            <td>{{ visit.id }}</td>
+
+                            <td>
+                                {% if visit.user_id is none %}
+                                    Неаутентифицированный пользователь
+                                {% else %}
+                                    {% for user in users %}
+                                        {% if visit.user_id == user.id %}
+                                            {{user.surname}} {{user.name}} {{user.patronymic}}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </td>
+
+                            <td>{{ visit.path }}</td>
+                            <td>{{ visit.created_at }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                <div>
+                    {% if pagination.has_prev%}
+                        <a href="{{ }}"></a>
+                    {% endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

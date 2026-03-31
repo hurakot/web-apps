@@ -1,0 +1,38 @@
+<!-- Страница, на которой расположен отчёт в виде таблицы о том, 
+ какие страницы есть на сайте и сколько раз их посещали. 
+ 
+ Внизу распологается кнопка скачивания таблицы в формате CSV. 
+ -->
+
+ {% extends 'base.html' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class = "col-md-10 mb-3 justify-content-start">
+                <title>Журнал страниц, который посещали пользователи</title>
+                <div>Журнал страниц, который посещали пользователи</div>
+                <a class="btn btn-primary m-2" href="{{ url_for('index') }}"> Перейти на главную страницу</a>
+                <table class="table table-bordered m-2 text-center table-hover">
+                    <tr>
+                        <th>№</th>
+                        <th>Страница</th>
+                        <th>Количество посещений</th>
+                    </tr>
+                    {% set ns = namespace(counter=0) %}
+
+                    {% for log in all_visits %}
+                    {% set ns.counter = ns.counter + 1 %}
+                    <tr>
+                        <td>{{ ns.counter}}</td>
+                        <td>{{ log[0] }}</td>
+                        <td>{{ log[1] }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <a class="btn btn-primary m-2" href="{{ url_for('visitor.export_pages_csv') }}">Экспорт в CVS</a>
+            </div>
+        </div>
+    </div>
+{% endblock%}
+
